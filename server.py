@@ -147,3 +147,8 @@ class GameServer:
                 self.connected[pid] = False
 
 GameServer().run()
+
+
+
+#python server.py
+#python client.py
