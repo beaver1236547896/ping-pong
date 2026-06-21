@@ -43,6 +43,9 @@ font_main = font.Font(None, 36)
 # --- ЗОБРАЖЕННЯ ----
 ball_img = image.load("мегА.png")
 ball_img = transform.scale(ball_img, (20,20))
+
+bg_img = image.load("кіртрь.jpeg")
+bg_img = transform.scale(bg_img, (WIDTH, HEIGHT))
 # --- ЗВУКИ ---
 
 # --- ГРА ---
@@ -89,7 +92,7 @@ while True:
         continue  # Блокує гру після перемоги
 
     if game_state:
-        screen.fill((30, 30, 30))
+        screen.blit(bg_img,(0,0))
         draw.rect(screen, (0, 255, 0), (20, game_state['paddles']['0'], 20, 100))
         draw.rect(screen, (255, 0, 255), (WIDTH - 40, game_state['paddles']['1'], 20, 100))
         screen.blit(ball_img, (game_state['ball']['x'] - 10, game_state['ball']['y'] - 10))
