@@ -6,6 +6,8 @@ from threading import Thread
 # ---ПУГАМЕ НАЛАШТУВАННЯ ---
 WIDTH, HEIGHT = 800, 600
 init()
+from pygame.locals import *
+mixer.init()
 screen = display.set_mode((WIDTH, HEIGHT))
 clock = time.Clock()
 display.set_caption("Пінг-Понг")
@@ -46,8 +48,16 @@ ball_img = transform.scale(ball_img, (20,20))
 
 bg_img = image.load("кіртрь.jpeg")
 bg_img = transform.scale(bg_img, (WIDTH, HEIGHT))
-# --- ЗВУКИ ---
 
+zb_img2 = image.load("crh.png")
+zb_img2 = transform.scale(zb_img2, (20, 100))
+zb_img1 = transform.flip(zb_img2, True, False)
+# --- ЗВУКИ ---
+piv_hit_sfx = mixer.Sound('ввжиижижиж.mp3')
+piv_hit_sfx.set_volume(0.23)
+
+rak_hit_sfx = mixer.Sound('ж.mp3')
+rak_hit_sfx.set_volume(0.23)
 # --- ГРА ---
 game_over = False
 winner = None
@@ -93,19 +103,17 @@ while True:
 
     if game_state:
         screen.blit(bg_img,(0,0))
-        draw.rect(screen, (0, 255, 0), (20, game_state['paddles']['0'], 20, 100))
-        draw.rect(screen, (255, 0, 255), (WIDTH - 40, game_state['paddles']['1'], 20, 100))
+        screen.blit(zb_img1, (20, game_state['paddles']['0']))
+        screen.blit(zb_img2, (WIDTH - 40, game_state['paddles']['1']))
         screen.blit(ball_img, (game_state['ball']['x'] - 10, game_state['ball']['y'] - 10))
         score_text = font_main.render(f"{game_state['scores'][0]} : {game_state['scores'][1]}", True, (255, 255, 255))
         screen.blit(score_text, (WIDTH // 2 -25, 20))
 
         if game_state['sound_event']:
             if game_state['sound_event'] == 'wall_hit':
-                # звук відбиття м'ячика від стін
-                pass
+                piv_hit_sfx.play()
             if game_state['sound_event'] == 'platform_hit':
-                # звук відбиття м'ячика від платформи
-                pass
+                rak_hit_sfx.play()
 
     else:
         wating_text = font_main.render(f"Очікування гравців...", True, (255, 255, 255))
