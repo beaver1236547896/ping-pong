@@ -58,6 +58,9 @@ piv_hit_sfx.set_volume(0.23)
 
 rak_hit_sfx = mixer.Sound('ж.mp3')
 rak_hit_sfx.set_volume(0.23)
+
+mixer.music.load("T).mp3")
+mixer.music.play(-1)
 # --- ГРА ---
 game_over = False
 winner = None
