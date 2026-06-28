@@ -59,6 +59,8 @@ piv_hit_sfx.set_volume(0.23)
 rak_hit_sfx = mixer.Sound('ж.mp3')
 rak_hit_sfx.set_volume(0.23)
 
+dy_hit_sfx = mixer.Sound('по.mp3')
+
 mixer.music.load("T).mp3")
 mixer.music.play(-1)
 # --- ГРА ---
@@ -85,6 +87,7 @@ while True:
         if you_winner is None:  # Встановлюємо тільки один раз
             if game_state["winner"] == my_id:
                 you_winner = True
+                dy_hit_sfx.play()
             else:
                 you_winner = False
 
